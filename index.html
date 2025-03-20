@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="600">
+    <title>LHS & RHS LETTERS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body oncontextmenu="return false">
+    <!-- Login Container -->
+    <div class="login-container" id="login-container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form id="login-form">
+                <input class="form-control" type="password" id="password" required placeholder="Password">
+                <button class="btn btn-primary mt-3" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Content (hidden until login) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-bar" style="display: none;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: #000000; font-family: fantasy;">What are you thinking of me!</a>
+        </div>
+    </nav>
+    
+    <div id="main-content" class="blog-posts">
+        <div class="container mt-3">
+            <h1 class="mb-4">Don't keep it in mind spill it</h1>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeBlogPostModal">
+                <i class="fa fa-pen" aria-hidden="true"></i> Write a new letter
+            </button>
+            <div id="blog-posts" class="mt-4"></div>
+        </div>
+
+        <!-- Write Blog Post Modal -->
+        <div class="modal fade" id="writeBlogPostModal" tabindex="-1" aria-labelledby="writeBlogPostModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="writeBlogPostModalLabel">Write a new letter</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="title" class="form-control mb-3" placeholder="Title">
+                        <textarea id="content" class="form-control mb-3" placeholder="Content"></textarea>
+                        <p id="content-count" class="text-muted">Characters: 0/10000</p>
+                        <input type="text" id="author" class="form-control" placeholder="Author">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="post-blog-post">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Post
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Blog Post Modal -->
+        <div class="modal fade" id="updateBlogPostModal" tabindex="-1" aria-labelledby="updateBlogPostModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateBlogPostModalLabel">Update blog post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="update-id" value="">
+                        <input type="hidden" id="update-author" value="">
+                        <input type="text" id="update-title" class="form-control mb-3" placeholder="Title">
+                        <textarea id="update-content" class="form-control mb-3" placeholder="Content"></textarea>
+                        <p id="update-content-count" class="text-muted">Characters: 0/10000</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="update-blog-post">
+                            <i class="fa fa-save" aria-hidden="true"></i> Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="container mt-5">
+            <div class="row" id="social-links">
+                <div class="col-12 text-center">
+                    <div class="social-links">
+                        <span class="created-by">Developed by S4JID | Find me</span><br>
+                        <a href="https://x.com/SheikhSajid69" target="_blank" title="X"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/the_sajidm69" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/sheikhsajid69" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/sheikh-sajid-m" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://buymeacoffee.com/sheikhsajid69" target="_blank" title="Buy Me a Coffee"><i class="fas fa-coffee"></i></a>
+                        <a href="https://medium.com/@sheikhsajid69.com" target="_blank" title="Medium"><i class="fab fa-medium-m"></i></a>
+                        <a href="mailto:sajidms1209@icloud.com" title="Mail"><i class="fas fa-envelope"></i></a>
+                        <a href="https://open.spotify.com/user/316v53vlmm3zfjxoubogax3rwkom?si=507800f1184a4bea" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
+                        <a href="https://topmate.io/sheikhsajid69" target="_blank" title="Topmate"><i class="fas fa-user-friends"></i></a>
+                        <a href="https://quora.com/profile/Sheikh-Sajid-69" target="_blank" title="Quora"><i class="fab fa-quora"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loading" class="notification">
+        Checking password...
+    </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+ body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(
+                125% 125% at -2% 101%,
+                rgba(245, 87, 2, 1) 10.5%,
+                rgba(245, 120, 2, 1) 16%,
+                rgba(245, 140, 2, 1) 17.5%,
+                rgba(245, 170, 100, 1) 25%,
+                rgba(238, 174, 202, 1) 40%,
+                rgba(202, 179, 214, 1) 65%,
+                rgba(148, 201, 233, 1) 100%
+            );
+        }
+        
+        .nav-bar {
+            animation: fadeIn 2s;
+            background: linear-gradient(to right, #ff69b4, #ffe066, #8bc34a, #03a9f4, #ff69b4);
+            background-size: 500% 500%;
+            animation: gradient 10s ease infinite;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .blog-posts {
+            animation: fadeIn 2s;
+            padding: 20px;
+            display: none; /* Hidden by default until login */
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid #fff;
+            width: 300px;
+        }
+        
+        .login-box h1 {
+            color: #fff;
+            text-align: center;
+        }
+        
+        .card {
+            transition: all 0.5s ease;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-content {
+            animation: zoomIn 1s;
+        }
+        
+        .btn {
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background-color: #03a9f4;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0277bd;
+            transform: scale(1.1);
+        }
+        
+        .btn-danger {
+            background-color: #f44336;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-danger:hover {
+            background-color: #e91e63;
+            transform: scale(1.1);
+        }
+        
+        .btn-secondary {
+            background-color: #9e9e9e;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7a7a7a;
+            transform: scale(1.1);
+        }
+        
+        #content, #update-content {
+            height: 200px;
+            resize: vertical;
+            min-height: 200px;
+            max-height: 500px;
+            width: 100%;
+        }
+        
+        .navbar-brand {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+        }
+        
+        footer {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .social-links a {
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        #loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        
+        #loading.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0 }
+            100% { opacity: 1 }
+        }
+        
+        @keyframes zoomIn {
+            0% { transform: scale(0.5) }
+            100% { transform: scale(1) }
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                margin: 10px 0;
+            }
+            
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .modal-dialog {
+                margin: 10px;
+            }
+            
+            .social-links a {
+                margin: 5px;
+                font-size: 1rem;
+            }
+            
+            .login-box {
+                width: 90%;
+            }
+        }
