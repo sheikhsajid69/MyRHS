@@ -1,4 +1,4 @@
- var currentAuthor = '';
+     var currentAuthor = '';
         var letterPosts = [];
         var id = 0;
 
