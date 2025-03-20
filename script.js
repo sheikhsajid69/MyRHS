@@ -3,16 +3,15 @@
         var id = 0;
 
         function getPasswordHash() {
-            const p1 = String.fromCharCode(116, 114, 105); //
-            const p2 = String.fromCharCode(115, 104, 97);  // 
-            const p3 = String.fromCharCode(115);           // 
-            const p4 = String.fromCharCode(38);            // 
-            const p5 = String.fromCharCode(116);           // 
+            const p1 = String.fromCharCode(116, 114, 105); // tri
+            const p2 = String.fromCharCode(115, 104, 97);  // sha
+            const p3 = String.fromCharCode(115);           // s
+            const p4 = String.fromCharCode(38);            // &
+            const p5 = String.fromCharCode(116);           // t
             const combined = [p1, p2, p3, p4, p5].join('');
             return CryptoJS.SHA256(combined).toString();
         }
 
-        // Load posts from URL parameter
         function loadPostsFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const postsData = urlParams.get('posts');
@@ -27,7 +26,6 @@
             }
         }
 
-        // Save posts to URL
         function updateUrlWithPosts() {
             const encodedPosts = btoa(encodeURIComponent(JSON.stringify(letterPosts)));
             const newUrl = `${window.location.pathname}?posts=${encodedPosts}`;
@@ -35,7 +33,6 @@
             document.getElementById('share-url').value = window.location.href;
         }
 
-        // Blog functions
         function displayBlogPosts() {
             var blogPostsHtml = '';
             letterPosts.slice().reverse().forEach(function(blogPost) {
@@ -86,15 +83,17 @@
             displayBlogPosts();
         }
 
-        $(document).ready(function() {
-            var loginForm = $("#login-form");
-            var passwordInput = $("#password");
-            var loading = $("#loading");
-            var blogContent = $("#main-content");
-            var loginContainer = $("#login-container");
-            var navBar = $(".nav-bar");
+        function showBlogContent() {
+            $('#login-container').hide();
+            $('.nav-bar').show();
+            $('#main-content').show();
+            displayBlogPosts();
+        }
 
-            navBar.hide();
+        $(document).ready(function() {
+            var $loginForm = $('#login-form');
+            var $passwordInput = $('#password');
+            var $loading = $('#loading');
 
             // Load posts from URL on page load
             loadPostsFromUrl();
@@ -103,29 +102,22 @@
             }
 
             // Login form submission
-            loginForm.submit(function(e) {
+            $loginForm.on('submit', function(e) {
                 e.preventDefault();
-                var enteredPassword = CryptoJS.SHA256(passwordInput.val()).toString();
+                var enteredPassword = CryptoJS.SHA256($passwordInput.val()).toString();
                 var correctPassword = getPasswordHash();
-                loading.addClass("show");
+                $loading.addClass('show');
                 
                 setTimeout(function() {
                     if (enteredPassword === correctPassword) {
-                        loading.removeClass("show");
+                        $loading.removeClass('show');
                         showBlogContent();
                     } else {
-                        loading.removeClass("show");
+                        $loading.removeClass('show');
                         alert("Incorrect password!");
                     }
                 }, 1000);
             });
-
-            function showBlogContent() {
-                loginContainer.hide();
-                navBar.show();
-                blogContent.show();
-                displayBlogPosts();
-            }
 
             // Post blog event listener
             document.getElementById('post-blog-post').addEventListener('click', function() {
