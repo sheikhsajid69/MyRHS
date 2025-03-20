@@ -3,11 +3,11 @@
         var id = 0;
 
         function getPasswordHash() {
-            const p1 = String.fromCharCode(116, 114, 105); // tri
-            const p2 = String.fromCharCode(115, 104, 97);  // sha
-            const p3 = String.fromCharCode(115);           // s
-            const p4 = String.fromCharCode(38);            // &
-            const p5 = String.fromCharCode(116);           // t
+            const p1 = String.fromCharCode(116, 114, 105); // 
+            const p2 = String.fromCharCode(115, 104, 97);  // 
+            const p3 = String.fromCharCode(115);           // 
+            const p4 = String.fromCharCode(38);            // 
+            const p5 = String.fromCharCode(116);           // 
             const combined = [p1, p2, p3, p4, p5].join('');
             return CryptoJS.SHA256(combined).toString();
         }
