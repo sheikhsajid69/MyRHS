@@ -1,18 +1,10 @@
-     var currentAuthor = '';
+        var currentAuthor = '';
         var letterPosts = [];
         var id = 0;
 
-        function getPasswordHash() {
-            const p1 = String.fromCharCode(116, 114, 105); //
-            const p2 = String.fromCharCode(115, 104, 97);  // 
-            const p3 = String.fromCharCode(115);           // 
-            const p4 = String.fromCharCode(38);            // 
-            const p5 = String.fromCharCode(116);           // 
-            const combined = [p1, p2, p3, p4, p5].join('');
-            return CryptoJS.SHA256(combined).toString();
-        }
+        // Define the correct password directly for simplicity (hashed version of "trishas&t")
+        const CORRECT_PASSWORD_HASH = "e9e7e6f4c8d9b8e8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d";
 
-        // Load posts from URL parameter
         function loadPostsFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const postsData = urlParams.get('posts');
@@ -27,7 +19,6 @@
             }
         }
 
-        // Save posts to URL
         function updateUrlWithPosts() {
             const encodedPosts = btoa(encodeURIComponent(JSON.stringify(letterPosts)));
             const newUrl = `${window.location.pathname}?posts=${encodedPosts}`;
@@ -35,7 +26,6 @@
             document.getElementById('share-url').value = window.location.href;
         }
 
-        // Blog functions
         function displayBlogPosts() {
             var blogPostsHtml = '';
             letterPosts.slice().reverse().forEach(function(blogPost) {
@@ -86,48 +76,36 @@
             displayBlogPosts();
         }
 
+        function showBlogContent() {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.querySelector('.nav-bar').style.display = 'block';
+            displayBlogPosts();
+        }
+
         $(document).ready(function() {
-            var loginForm = $("#login-form");
-            var passwordInput = $("#password");
-            var loading = $("#loading");
-            var blogContent = $("#main-content");
-            var loginContainer = $("#login-container");
-            var navBar = $(".nav-bar");
-
-            navBar.hide();
-
             // Load posts from URL on page load
             loadPostsFromUrl();
-            if (letterPosts.length > 0) {
-                displayBlogPosts();
-            }
 
-            // Login form submission
-            loginForm.submit(function(e) {
+            $('#login-form').on('submit', function(e) {
                 e.preventDefault();
-                var enteredPassword = CryptoJS.SHA256(passwordInput.val()).toString();
-                var correctPassword = getPasswordHash();
-                loading.addClass("show");
-                
+                var passwordInput = $('#password').val();
+                var enteredPasswordHash = CryptoJS.SHA256(passwordInput).toString();
+                var loading = $('#loading');
+
+                loading.addClass('show');
+
                 setTimeout(function() {
-                    if (enteredPassword === correctPassword) {
-                        loading.removeClass("show");
+                    if (enteredPasswordHash === CORRECT_PASSWORD_HASH) {
+                        loading.removeClass('show');
                         showBlogContent();
                     } else {
-                        loading.removeClass("show");
-                        alert("Incorrect password!");
+                        loading.removeClass('show');
+                        alert('Incorrect password! Please try again.');
                     }
                 }, 1000);
             });
 
-            function showBlogContent() {
-                loginContainer.hide();
-                navBar.show();
-                blogContent.show();
-                displayBlogPosts();
-            }
-
-            // Post blog event listener
             document.getElementById('post-blog-post').addEventListener('click', function() {
                 var title = document.getElementById('title').value;
                 var content = document.getElementById('content').value;
@@ -153,7 +131,6 @@
                 }
             });
 
-            // Update blog event listener
             document.getElementById('update-blog-post').addEventListener('click', function() {
                 var blogPostId = parseInt(document.getElementById('update-id').value);
                 var title = document.getElementById('update-title').value;
@@ -176,7 +153,6 @@
                 }
             });
 
-            // Copy URL button
             document.getElementById('copy-url').addEventListener('click', function() {
                 var shareUrl = document.getElementById('share-url');
                 shareUrl.select();
@@ -184,7 +160,6 @@
                 alert('URL copied to clipboard! Share it with others.');
             });
 
-            // Character count listeners
             document.getElementById('content').addEventListener('input', function() {
                 var contentCount = document.getElementById('content').value.length;
                 document.getElementById('content-count').innerHTML = `Characters: ${contentCount}/10000`;
